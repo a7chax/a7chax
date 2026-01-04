@@ -5,7 +5,6 @@ visual-studio-code
 postman
 jetbrain-toolbox
 zoom
-virtualbox
 discord
 spotify
 obs-studio
@@ -25,4 +24,3 @@ sdkman
 nvm
 zotero
 git
-
