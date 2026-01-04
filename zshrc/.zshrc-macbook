@@ -169,9 +169,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # ============================
 eval "$(gh copilot alias -- zsh)"
 
-
-export AGENT_ROUTER_TOKEN="sk-fLgSYv81m7MLk15Qi4tXJqsaEhz3MHDwNhuZpbD5UyIcT1hO"
-
 alias cursor='open -a Cursor'
 alias zed='zed-preview'
 
