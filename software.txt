@@ -1,6 +1,5 @@
 google-chrome-stable
 firefox
-sublime-text-3
 visual-studio-code
 postman
 jetbrain-toolbox
@@ -8,19 +7,8 @@ zoom
 discord
 spotify
 obs-studio
-wps-office
-telegram-desktop
-walc
-simple-screen-recording
-vim
 zsh
-mysql
-nginx
-php-fpm
-php
 adminer
 git-secret
-sdkman
-nvm
 zotero
 git

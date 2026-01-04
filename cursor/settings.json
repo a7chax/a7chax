@@ -1,0 +1,11 @@
+{
+  "window.commandCenter": 1,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.editor.wrapTabs": true,
+  "cursor.general.disableHttp2": true,
+  "jupyter.askForKernelRestart": false,
+  "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "update.releaseTrack": "prerelease"
+}

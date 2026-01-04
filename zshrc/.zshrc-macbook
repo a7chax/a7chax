@@ -1,14 +1,27 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-
+export ZSH_WAKATIME_PROJECT_DETECTION=true
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+# ============================
+# COMPLETION OPTIMIZATIONS
+# ============================
+# Skip verification of insecure directories and load completions faster
+ZSH_DISABLE_COMPFIX=true
+
+# Load Homebrew completions if available
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  autoload -Uz compinit
+  compinit -u
+fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="intheloop"
+ZSH_THEME="bullet-train-clone"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -72,8 +85,9 @@ ZSH_THEME="intheloop"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-	zsh-syntax-highlighting
+  zsh-syntax-highlighting
   zsh-sdkman
+  zsh-wakatime
   zsh-autosuggestions
 )
 
@@ -108,31 +122,70 @@ source $ZSH/oh-my-zsh.sh
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 alias code="code-insiders"
 
+# ============================
+# OPTIMIZED PATH CONFIGURATION
+# ============================
 
+# Consolidate all PATH additions into a single operation
+# Android SDK
+export ANDROID_HOME="/Users/arungicahaya/Library/Android/sdk"
+
+# PNPM
+
+# Build PATH efficiently in one go
+PATH_ADDITIONS=(
+  "/opt/homebrew/opt/coreutils/libexec/gnubin"
+  "/opt/homebrew/opt/ruby/bin"
+  "/opt/homebrew/lib/ruby/gems/3.3.0/bin"
+  "/opt/homebrew/opt/postgresql@16/bin"
+  "$PNPM_HOME"
+  "$ANDROID_HOME/platform-tools"
+  "$ANDROID_HOME/emulator"
+  "$ANDROID_HOME/tools"
+  "$ANDROID_HOME/tools/bin"
+)
+
+# Add all paths at once
+for path_dir in "${PATH_ADDITIONS[@]}"; do
+  [[ -d "$path_dir" ]] && PATH="$path_dir:$PATH"
+done
+
+export PATH
+
+# ============================
+# LAZY LOADING OPTIMIZATIONS
+# ============================
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# ============================
+# SDKMAN CONFIGURATION
+# ============================
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-export PATH=/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH
-
-  export ANDROID_HOME=/Users/arungicahaya/Library/Android/sdk
-  export PATH=$PATH:$ANDROID_HOME/platform-tools/
-  export PATH=$PATH:$ANDROID_HOME/emulator/
-  export PATH=$PATH:$ANDROID_HOME/tools/
-  export PATH=$PATH:$ANDROID_HOME/tools/bin
-
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-
-# pnpm
-export PNPM_HOME="/Users/arungicahaya/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-
-
-export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
-
-# pnpm end
+# ============================
+# FINAL CONFIGURATIONS
+# ============================
 eval "$(gh copilot alias -- zsh)"
+
+
+# export GEMINI_API_KEY="AIzaSyAl6jD1kBGfhMoh5QF15-7IUnCWnOn7Bs0"
+
+export AGENT_ROUTER_TOKEN="sk-fLgSYv81m7MLk15Qi4tXJqsaEhz3MHDwNhuZpbD5UyIcT1hO"
+
+alias cursor='open -a Cursor'
+alias zed='zed-preview'
+
+if command -v node &> /dev/null; then
+    NODE_VERSION=$(node --version | sed 's/^v//')
+    if [ -d "/Users/arungicahaya/.proto/tools/node/$NODE_VERSION/bin" ]; then
+        export PATH="/Users/arungicahaya/.proto/tools/node/$NODE_VERSION/bin:$PATH"
+    fi
+fi
+# Added by Antigravity
+export PATH="/Users/arungicahaya/.antigravity/antigravity/bin:$PATH"
+
+# proto
+export PROTO_HOME="$HOME/.proto";
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
