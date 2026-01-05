@@ -152,3 +152,6 @@ export PATH="/home/nevermind/a7chax/.pixi/bin:$PATH"
 
 # opencode
 export PATH=/home/nevermind/.opencode/bin:$PATH
+
+# bun global packages
+export PATH="$HOME/.bun/bin:$PATH"
