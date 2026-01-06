@@ -27,7 +27,8 @@ config.colors = {
 }
 
 config.notification_handling = 'AlwaysShow'
-
+config.scrollback_lines = 1000
+config.front_end = "OpenGL"
 
 
 config.automatically_reload_config = true
