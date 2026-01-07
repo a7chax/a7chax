@@ -11,7 +11,11 @@ local config = wezterm.config_builder()
 config.window_decorations = "RESIZE"
 
 -- or, changing the font size and color scheme.
-config.font_size = 9
+if wezterm.target_triple:find("apple%-darwin") then
+    config.font_size = 10
+else
+    config.font_size = 9
+end
 config.color_scheme = 'Breeze (Gogh)'
 config.use_fancy_tab_bar = false
 config.default_cursor_style = 'SteadyBlock'
