@@ -29,6 +29,7 @@ config.colors = {
 config.notification_handling = 'AlwaysShow'
 config.scrollback_lines = 1000
 config.front_end = "OpenGL"
+config.webgpu_power_preference="HighPerformance"
 
 
 config.automatically_reload_config = true
