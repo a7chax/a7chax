@@ -5,10 +5,13 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices.
+config.default_prog = { 'zsh', '-c', 'source ~/.zshrc' }
 
 -- For example, changing the initial geometry for new windows:
 
 config.window_decorations = "RESIZE"
+
+
 
 -- or, changing the font size and color scheme.
 config.font_size = 9
