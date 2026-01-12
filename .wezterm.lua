@@ -5,7 +5,11 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices.
-config.default_prog = { "zsh", "-c", " exec zsh" }
+config.default_prog = {
+    "zsh",
+    "-c",
+    "source ~/.zshrc && exec zsh"
+  }
 
 -- For example, changing the initial geometry for new windows:
 
