@@ -1,3 +1,4 @@
+[[ $- != *i* ]] && return
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH_WAKATIME_PROJECT_DETECTION=true
@@ -167,20 +168,28 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # ============================
 # FINAL CONFIGURATIONS
 # ============================
-eval "$(gh copilot alias -- zsh)"
+
+
 
 alias cursor='open -a Cursor'
 alias zed='zed-preview'
 
-if command -v node &> /dev/null; then
-    NODE_VERSION=$(node --version | sed 's/^v//')
-    if [ -d "/Users/arungicahaya/.proto/tools/node/$NODE_VERSION/bin" ]; then
-        export PATH="/Users/arungicahaya/.proto/tools/node/$NODE_VERSION/bin:$PATH"
+export PROTO_HOME="$HOME/.proto"
+
+# Masukkan Shims dan Bin Proto di urutan paling depan
+# Ini memastikan 'node', 'npm', dan 'eas' (npm global) langsung terbaca
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+
+# Jika kamu tetap ingin menambahkan folder spesifik versi node (opsional):
+if [ -f "$PROTO_HOME/shims/node" ]; then
+    NODE_VERSION=$("$PROTO_HOME/shims/node" --version | sed 's/^v//')
+    NODE_BIN_PATH="$PROTO_HOME/tools/node/$NODE_VERSION/bin"
+    if [ -d "$NODE_BIN_PATH" ]; then
+        export PATH="$NODE_BIN_PATH:$PATH"
     fi
 fi
 # Added by Antigravity
 export PATH="/Users/arungicahaya/.antigravity/antigravity/bin:$PATH"
 
-# proto
-export PROTO_HOME="$HOME/.proto";
-export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
+# opencode
+export PATH=/Users/arungicahaya/.opencode/bin:$PATH
