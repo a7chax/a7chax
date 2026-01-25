@@ -37,7 +37,6 @@
 - 📱 Building cross-platform mobile applications
 - 🔧 Building efficient workflows
 - 🚀 Building scalable applications
-- 🗺️ Learning and working with geospatial data
 
 ## 📫 Let's Connect
 
