@@ -1,12 +1,9 @@
 google-chrome-stable
-firefox
+firefox-nightly
 visual-studio-code
-postman
+bruno
 jetbrain-toolbox
 zoom
-discord
-spotify
-obs-studio
 zsh
 adminer
 git-secret
