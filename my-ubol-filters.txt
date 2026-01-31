@@ -1,13 +1,16 @@
 lms.binus.ac.id##.show.fade.modal
 lms.binus.ac.id##.show.fade.modal-backdrop
 
-www.coursesidekick.com##.-tw-mt-\[52rem\].tw-items-center.tw-flex-col.tw-flex.tw-rounded-lg.tw-text-white.tw-w-full.tw-bg-primary-700.md\:tw-px-20.tw-px-16.lg\:tw-px-32.tw-py-16
-
 www.youtube.com###foreground-content
+www.youtube.com###owner-sub-count
+www.youtube.com###subscribe-button
 www.youtube.com###voice-search-button > .ytd-masthead.style-scope > yt-button-shape
+www.youtube.com##div.style-scope.ytd-playlist-panel-renderer
 www.youtube.com##grid-shelf-view-model[style][data-resize-observer-id]
 www.youtube.com##yt-tab-shape.yt-tab-shape-wiz--host-clickable.yt-tab-shape-wiz:nth-of-type(3)
+www.youtube.com##yt-video-metadata-carousel-view-model
 www.youtube.com##ytd-guide-section-renderer:nth-of-type(1)
+www.youtube.com##ytd-menu-renderer.style-scope.ytd-watch-metadata
 www.youtube.com##ytd-mini-guide-renderer.ytd-app.style-scope
 www.youtube.com##ytd-reel-shelf-renderer
 www.youtube.com##ytd-reel-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-reel-shelf-renderer.style-scope
