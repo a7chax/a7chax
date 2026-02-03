@@ -1,6 +1,7 @@
 lms.binus.ac.id##.show.fade.modal
 lms.binus.ac.id##.show.fade.modal-backdrop
 
+www.youtube.com###dislike-button
 www.youtube.com###foreground-content
 www.youtube.com###owner-sub-count
 www.youtube.com###subscribe-button
