@@ -15,6 +15,13 @@ else
     config.window_decorations = "NONE"
     config.font_size = 9
 end
+
+config.font = wezterm.font_with_fallback {
+    'JetBrains Mono',
+    'Apple Color Emoji',
+    'Noto Color Emoji',
+}
+
 config.color_scheme = 'Breeze (Gogh)'
 config.use_fancy_tab_bar = false
 config.default_cursor_style = 'SteadyBlock'
