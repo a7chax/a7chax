@@ -5,17 +5,14 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices.
-config.default_prog = { '/bin/zsh', '-l', '-i' }
+config.default_prog = { '/bin/zsh' }
 -- For example, changing the initial geometry for new windows:
 
-config.window_decorations = "RESIZE"
-
-
-
--- or, changing the font size and color scheme.
 if wezterm.target_triple:find("apple%-darwin") then
+    config.window_decorations = "RESIZE"
     config.font_size = 10
 else
+    config.window_decorations = "NONE"
     config.font_size = 9
 end
 config.color_scheme = 'Breeze (Gogh)'
@@ -34,7 +31,7 @@ config.colors = {
 
 config.notification_handling = 'AlwaysShow'
 config.scrollback_lines = 1000
-config.front_end = "OpenGL"
+config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 
 
