@@ -21,6 +21,7 @@ if [ ! -n "${BULLETTRAIN_PROMPT_ORDER+1}" ]; then
     time
     status
     dir
+    virtualenv
     screen
     git
     cmd_exec_time
@@ -426,7 +427,7 @@ git_prompt_status() {
   local INDEX STATUS
   INDEX=$(command git status --porcelain -b 2>/dev/null)
   STATUS=""
-  
+
   if $(echo "$INDEX" | grep -E '^\?\? ' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_UNTRACKED$STATUS"
   fi
@@ -464,7 +465,7 @@ git_prompt_status() {
   if $(echo "$INDEX" | grep '^## [^ ]\+ .*diverged' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_DIVERGED$STATUS"
   fi
-  
+
   echo $STATUS
 }
 
@@ -486,7 +487,7 @@ prompt_git() {
 
     # Get git prompt - use our implementation (defined above) or oh-my-zsh's if available
     git_prompt=$(git_prompt_info)
-    
+
     if [[ $BULLETTRAIN_GIT_EXTENDED == true ]]; then
       echo -n ${git_prompt}$(git_prompt_status)
     else
@@ -622,13 +623,23 @@ prompt_kctx() {
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
-  if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment $BULLETTRAIN_VIRTUALENV_BG $BULLETTRAIN_VIRTUALENV_FG $BULLETTRAIN_VIRTUALENV_PREFIX" $(basename $virtualenv_path)"
+  local virtualenv_name=""
+
+  if [[ -n "$virtualenv_path" && -n "$VIRTUAL_ENV_DISABLE_PROMPT" ]]; then
+    virtualenv_name="$(basename "$virtualenv_path")"
+  elif [[ -n "$CONDA_DEFAULT_ENV" ]]; then
+    virtualenv_name="$CONDA_DEFAULT_ENV"
+  elif [[ -n "$CONDA_PREFIX" ]]; then
+    virtualenv_name="$(basename "$CONDA_PREFIX")"
   elif which pyenv &> /dev/null; then
-    if [[ "$(pyenv version | sed -e 's/ (set.*$//' | tr '\n' ' ' | sed 's/.$//')" != "system" ]]; then
-      prompt_segment $BULLETTRAIN_VIRTUALENV_BG $BULLETTRAIN_VIRTUALENV_FG $BULLETTRAIN_VIRTUALENV_PREFIX" $(pyenv version | sed -e 's/ (set.*$//' | tr '\n' ' ' | sed 's/.$//')"
+    local pyenv_name
+    pyenv_name="$(pyenv version | sed -e 's/ (set.*$//' | tr '\n' ' ' | sed 's/.$//')"
+    if [[ "$pyenv_name" != "system" ]]; then
+      virtualenv_name="$pyenv_name"
     fi
   fi
+
+  [[ -n "$virtualenv_name" ]] && prompt_segment $BULLETTRAIN_VIRTUALENV_BG $BULLETTRAIN_VIRTUALENV_FG $BULLETTRAIN_VIRTUALENV_PREFIX" ${virtualenv_name}"
 }
 
 # NVM: Node version manager
