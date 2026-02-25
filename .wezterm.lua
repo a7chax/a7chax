@@ -6,7 +6,15 @@ local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices.
 config.default_prog = { '/bin/zsh' }
--- For example, changing the initial geometry for new windows:
+
+if wezterm.target_triple:find("apple%-darwin") then
+    -- macOS: login shell (needed for Homebrew PATH)
+    config.default_prog = { '/bin/zsh', '-l' }
+  else
+    -- non-macOS: normal zsh
+    config.default_prog = { '/bin/zsh' }
+  end
+  -- For example, changing the initial geometry for new windows:
 
 if wezterm.target_triple:find("apple%-darwin") then
     config.window_decorations = "RESIZE"
@@ -66,8 +74,6 @@ wezterm.on(
         wezterm.GLOBAL.cols = get_max_cols(window)
     end
 )
-
-local wezterm           = require 'wezterm'
 
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
