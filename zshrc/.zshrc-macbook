@@ -193,3 +193,4 @@ export PATH="/Users/arungicahaya/.antigravity/antigravity/bin:$PATH"
 
 # opencode
 export PATH=/Users/arungicahaya/.opencode/bin:$PATH
+export EXPO_NO_MAC_CATALYST=1
