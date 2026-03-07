@@ -113,12 +113,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias code="code-insiders"
-# alias zed="zed-preview"
+alias zed="zed-preview"
 
 source "/home/nevermind/.sdkman/bin/sdkman-init.sh"
 
 
- source $HOME/.local/bin/env
+#  source $HOME/.local/bin/env
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -136,19 +136,19 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # proto
-export PROTO_HOME="/home/nevermind/a7chax/.proto"
+export PROTO_HOME="/home/nevermind/.proto"
 export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
 
 # Add global npm packages from proto node installation (dynamically)
 # This adds the bin directory for the active Node.js version's global packages
 if command -v node &> /dev/null; then
     NODE_VERSION=$(node --version | sed 's/^v//')
-    if [ -d "/mnt/personaldata/.proto/tools/node/$NODE_VERSION/bin" ]; then
-        export PATH="/mnt/personaldata/.proto/tools/node/$NODE_VERSION/bin:$PATH"
+    if [ -d "$PROTO_HOME/tools/node/$NODE_VERSION/bin" ]; then
+        export PATH="$PROTO_HOME/tools/node/$NODE_VERSION/bin:$PATH"
     fi
 fi
 
-export PATH="/home/nevermind/a7chax/.pixi/bin:$PATH"
+export PATH="/home/nevermind/.pixi/bin:$PATH"
 
 # opencode
 export PATH=/home/nevermind/.opencode/bin:$PATH
