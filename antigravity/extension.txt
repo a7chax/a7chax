@@ -1,0 +1,10 @@
+[createInstance] extensionManagementService depends on antigravityAnalytics which is NOT registered.
+biomejs.biome
+bradlc.vscode-tailwindcss
+dsznajder.es7-react-js-snippets
+eamodio.gitlens
+formulahendry.auto-close-tag
+formulahendry.auto-rename-tag
+pkief.material-icon-theme
+ritwickdey.liveserver
+wakatime.vscode-wakatime
