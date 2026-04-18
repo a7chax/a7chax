@@ -1,9 +1,9 @@
-.gitsecret/keys/random_seed
-!*.secret
-nginx.conf
 
 .DS_Store
-
-# Vagrant
+pi-hole/etc-pihole/
+.gitsecret/keys/random_seed
+nginx.conf
+!*.secret
 .vagrant/
+# Vagrant
 Vagrantfile.local

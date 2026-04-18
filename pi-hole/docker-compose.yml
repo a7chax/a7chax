@@ -1,0 +1,40 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      # DNS Ports
+      - "53:53/tcp"
+      - "53:53/udp"
+      # Default HTTP Port
+      - "80:80/tcp"
+      # Default HTTPS Port (FTL generates a self-signed certificate)
+      - "443:443/tcp"
+      # Uncomment the line below if you are using Pi-hole as your DHCP server
+      #- "67:67/udp"
+      # Uncomment the line below if you are using Pi-hole as your NTP server
+      #- "123:123/udp"
+    environment:
+      # Set the appropriate timezone for your location
+      TZ: 'America/Chicago'
+      # Set a password to access the web interface. If not set, a random one will be assigned.
+      FTLCONF_webserver_api_password: 'your_secure_password_here'
+      # If using Docker's default `bridge` network, the dns listening mode should be set to 'ALL'
+      FTLCONF_dns_listeningMode: 'ALL'
+    volumes:
+      # We still need this for Pi-hole to function during runtime, 
+      # but it will be wiped every time you run 'docker compose down'
+      - './etc-pihole:/etc/pihole'
+      # Mount your blocklist file directly into the container
+      - './tiktok_block.txt:/tiktok_block.txt:ro'
+    # Automatically import the blocklist on every startup
+    command: >
+      bash -c "
+      echo 'Importing TikTok blocklist...' &&
+      cat /tiktok_block.txt | xargs -n 50 pihole --regex &&
+      /start.sh"
+    cap_add:
+      - NET_ADMIN
+      - SYS_TIME
+      - SYS_NICE
+    restart: unless-stopped
