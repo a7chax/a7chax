@@ -3,6 +3,8 @@
 # This script holds the list of your currently installed AI agent skills.
 # You can run this on a new PC to sync your skills.
 
+SKILLS_DIR="$HOME/.agents/skills"
+
 # List of skills to install. The skills.sh CLI installs a specific skill from a
 # repository with:
 #   npx skills add <repo> --skill <skill-name>
@@ -12,8 +14,14 @@ SKILLS=(
   "https://github.com/juliusbrussee/caveman|caveman-commit"
   "https://github.com/juliusbrussee/caveman|caveman-review"
   "https://github.com/anthropics/skills|claude-api"
+  "https://github.com/rtk-ai/rtk|code-simplifier"
   "https://github.com/juliusbrussee/caveman|compress"
+  "https://github.com/rtk-ai/rtk|design-patterns"
+  "https://github.com/rtk-ai/rtk|issue-triage"
+  "https://github.com/rtk-ai/rtk|pr-triage"
   "https://github.com/rtk-ai/rtk|rtk-tdd"
+  "https://github.com/rtk-ai/rtk|rtk-triage"
+  "https://github.com/rtk-ai/rtk|tdd-rust"
   "https://github.com/vercel-labs/skills|find-skills"
   "https://github.com/anthropics/skills|frontend-design"
   "https://github.com/anthropics/skills|internal-comms"
@@ -26,6 +34,10 @@ SKILLS=(
 
 echo "Syncing Agent Skills..."
 echo "-----------------------"
+echo "Skills directory: $SKILLS_DIR"
+echo ""
+
+mkdir -p "$SKILLS_DIR"
 
 failures=0
 
@@ -34,7 +46,7 @@ for entry in "${SKILLS[@]}"; do
   skill="${entry##*|}"
   echo "Installing skill: $skill ($repo)"
 
-  if ! npx skills add "$repo" --skill "$skill" --global --agent codex --yes; then
+  if ! npx skills add "$repo" --skill "$skill" --global --agent cline --yes; then
     echo "Failed to install skill: $skill" >&2
     failures=$((failures + 1))
   fi
