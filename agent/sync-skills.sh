@@ -32,6 +32,13 @@ SKILLS=(
   "https://github.com/anthropics/skills|webapp-testing"
 )
 
+# Repositories that are not available through skills.sh. These are cloned into
+# a temporary directory under ~/.agents/skills, cleaned, then moved up into the
+# shared skills directory.
+MANUAL_REPOS=(
+  "https://github.com/android/skills|android-skills-XXXXXX"
+)
+
 echo "Syncing Agent Skills..."
 echo "-----------------------"
 echo "Skills directory: $SKILLS_DIR"
@@ -40,6 +47,28 @@ echo ""
 mkdir -p "$SKILLS_DIR"
 
 failures=0
+
+for entry in "${MANUAL_REPOS[@]}"; do
+  repo="${entry%%|*}"
+  prefix="${entry##*|}"
+  checkout="$(mktemp -d "$SKILLS_DIR/$prefix")"
+  echo "Syncing manual skill repo: $repo"
+
+  if ! git clone "$repo" "$checkout"; then
+    echo "Failed to clone manual skill repo: $repo" >&2
+    failures=$((failures + 1))
+    rm -rf "$checkout"
+    continue
+  fi
+
+  rm -rf "$checkout/LICENSE.txt" "$checkout/README.md"
+  for path in "$checkout"/*; do
+    target="$SKILLS_DIR/${path##*/}"
+    rm -rf "$target"
+    mv "$path" "$SKILLS_DIR"/
+  done
+  rm -rf "$checkout"
+done
 
 for entry in "${SKILLS[@]}"; do
   repo="${entry%%|*}"

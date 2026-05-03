@@ -10,11 +10,11 @@ config.default_prog = { '/bin/zsh' }
 if wezterm.target_triple:find("apple%-darwin") then
     -- macOS: login shell (needed for Homebrew PATH)
     config.default_prog = { '/bin/zsh', '-l' }
-  else
+else
     -- non-macOS: normal zsh
     config.default_prog = { '/bin/zsh' }
-  end
-  -- For example, changing the initial geometry for new windows:
+end
+-- For example, changing the initial geometry for new windows:
 
 if wezterm.target_triple:find("apple%-darwin") then
     config.window_decorations = "RESIZE"
@@ -43,8 +43,6 @@ config.visual_bell = {
 config.colors = {
     visual_bell = '#202020',
 }
-
-config.notification_handling = 'AlwaysShow'
 config.scrollback_lines = 1000
 config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
@@ -74,6 +72,10 @@ wezterm.on(
         wezterm.GLOBAL.cols = get_max_cols(window)
     end
 )
+
+wezterm.on('bell', function(window, pane)
+    window:toast_notification('WezTerm', 'Terminal bell', nil, NOTIFICATION_TIMEOUT_MS)
+end)
 
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 

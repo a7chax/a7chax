@@ -22,6 +22,10 @@ The script creates `~/.agents/skills` when needed, then installs each entry glob
 npx skills add <github-repository-url> --skill <skill-name> --global --agent cline --yes
 ```
 
+Some skills are not available on skills.sh. Those repositories are cloned manually into a temporary directory under `~/.agents/skills`; `LICENSE.txt` and `README.md` are removed, then the remaining repository contents are moved into `~/.agents/skills`. Current manual source:
+
+- https://github.com/android/skills
+
 To sync skills:
 
 ```bash
