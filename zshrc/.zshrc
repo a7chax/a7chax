@@ -77,7 +77,6 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 plugins=(
     git
     zsh-syntax-highlighting
-    zsh-sdkman
     zsh-wakatime
     zsh-autosuggestions
 )
@@ -113,17 +112,15 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias code="code-insiders"
-alias zed="zed-preview"
-
-source "/home/nevermind/.sdkman/bin/sdkman-init.sh"
+alias zed="/home/nevermind/.local/zed-preview.app/bin/zed"
 
 
 #  source $HOME/.local/bin/env
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 alias docker-enable='sudo systemctl enable docker.service containerd.service'
+alias docker-start='sudo systemctl start docker.service'
+alias docker-stop='sudo systemctl stop docker.service'
 
 export PATH=$PATH:"$HOME/Android/Sdk/emulator"
 
@@ -155,3 +152,4 @@ export PATH=/home/nevermind/.opencode/bin:$PATH
 
 # bun global packages
 export PATH="$HOME/.bun/bin:$PATH"
+eval "$(~/.local/bin/mise activate)"
