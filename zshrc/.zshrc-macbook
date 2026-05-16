@@ -1,25 +1,11 @@
-[[ $- != *i* ]] && return
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export ZSH_WAKATIME_PROJECT_DETECTION=true
-# Path to your oh-my-zsh installation.
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# ============================
-# COMPLETION OPTIMIZATIONS
-# ============================
-# Skip verification of insecure directories and load completions faster
-ZSH_DISABLE_COMPFIX=true
-
-# Load Homebrew completions if available
-if type brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-  autoload -Uz compinit
-  compinit -u
-fi
-
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="bullet-train-clone"
@@ -29,6 +15,12 @@ ZSH_THEME="bullet-train-clone"
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+#
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  autoload -Uz compinit
+  compinit -u
+fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -88,7 +80,6 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-sdkman
-  zsh-wakatime
   zsh-autosuggestions
 )
 
@@ -105,35 +96,14 @@ source $ZSH/oh-my-zsh.sh
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-# source /Users/arungicahaya/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# export ARCHFLAGS="-arch $(uname -m)"
 alias code="code-insiders"
+export ANDROID_HOME="/Users/<username>/Library/Android/sdk"
 
-# ============================
-# OPTIMIZED PATH CONFIGURATION
-# ============================
-
-# Consolidate all PATH additions into a single operation
-# Android SDK
-export ANDROID_HOME="/Users/arungicahaya/Library/Android/sdk"
-
-# PNPM
-
-# Build PATH efficiently in one go
 PATH_ADDITIONS=(
   "/opt/homebrew/opt/coreutils/libexec/gnubin"
   "/opt/homebrew/opt/ruby/bin"
@@ -146,51 +116,24 @@ PATH_ADDITIONS=(
   "$ANDROID_HOME/tools/bin"
 )
 
-# Add all paths at once
-for path_dir in "${PATH_ADDITIONS[@]}"; do
-  [[ -d "$path_dir" ]] && PATH="$path_dir:$PATH"
+for p in "${PATH_ADDITIONS[@]}"; do
+  [[ -d "$p" ]] && export PATH="$p:$PATH"
 done
 
-export PATH
-
-# ============================
-# LAZY LOADING OPTIMIZATIONS
-# ============================
-
-export PATH="$HOME/.local/bin:$PATH"
-
-# ============================
-# SDKMAN CONFIGURATION
-# ============================
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# ============================
-# FINAL CONFIGURATIONS
-# ============================
-
-
-
-alias cursor='open -a Cursor'
+alias cursor='open -a cursor'
 alias zed='zed-preview'
 
-export PROTO_HOME="$HOME/.proto"
 
-# Masukkan Shims dan Bin Proto di urutan paling depan
-# Ini memastikan 'node', 'npm', dan 'eas' (npm global) langsung terbaca
-export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+eval "$(/Users/<username>/.local/bin/mise activate zsh)"
 
-# Jika kamu tetap ingin menambahkan folder spesifik versi node (opsional):
-if [ -f "$PROTO_HOME/shims/node" ]; then
-    NODE_VERSION=$("$PROTO_HOME/shims/node" --version | sed 's/^v//')
-    NODE_BIN_PATH="$PROTO_HOME/tools/node/$NODE_VERSION/bin"
-    if [ -d "$NODE_BIN_PATH" ]; then
-        export PATH="$NODE_BIN_PATH:$PATH"
-    fi
-fi
+
 # Added by Antigravity
-export PATH="/Users/arungicahaya/.antigravity/antigravity/bin:$PATH"
+export PATH="/Users/<username>/.antigravity/antigravity/bin:$PATH"
 
 # opencode
-export PATH=/Users/arungicahaya/.opencode/bin:$PATH
 export EXPO_NO_MAC_CATALYST=1
+
+eval "$(rbenv init -)"
+
+
+export SENTRY_DISABLE_AUTO_UPLOAD=true
