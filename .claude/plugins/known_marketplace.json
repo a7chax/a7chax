@@ -1,0 +1,19 @@
+{
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      },
+      "installLocation": "/Users/<username>/.claude/plugins/marketplaces/claude-plugins-official",
+      "lastUpdated": "2026-05-28T08:04:17.425Z"
+    },
+    "firebase": {
+      "source": {
+        "source": "github",
+        "repo": "firebase/firebase-tools"
+      },
+      "installLocation": "/Users/<username>/.claude/plugins/marketplaces/firebase",
+      "lastUpdated": "2026-05-06T03:59:19.844Z"
+    }
+  }
+  

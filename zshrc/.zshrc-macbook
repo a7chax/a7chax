@@ -135,5 +135,25 @@ export EXPO_NO_MAC_CATALYST=1
 
 eval "$(rbenv init -)"
 
+# Added by Antigravity
+export PATH="/Users/<username>/.antigravity/antigravity/bin:$PATH"
 
+
+
+export GITLAB_TOKEN="glpat-DXggBS-w93KnmMOW_lEZs2M6MQpvOjEKdTprdXI2eA8.01.171szgcv8"
+
+# Added by Antigravity
+export PATH="/Users/<username>/.antigravity/antigravity/bin:$PATH"
 export SENTRY_DISABLE_AUTO_UPLOAD=true
+
+
+# Added by Antigravity
+export PATH="/Users/<username>/.antigravity/antigravity/bin:$PATH"
+
+# opencode
+export PATH=/Users/<username>/.opencode/bin:$PATH
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/<username>/.local/bin:$PATH"
+export PATH=$PATH:$HOME/.maestro/bin

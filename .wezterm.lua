@@ -43,6 +43,8 @@ config.visual_bell = {
 config.colors = {
     visual_bell = '#202020',
 }
+
+config.notification_handling = 'AlwaysShow'
 config.scrollback_lines = 1000
 config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
@@ -73,6 +75,7 @@ wezterm.on(
     end
 )
 
+local NOTIFICATION_TIMEOUT_MS = 300
 wezterm.on('bell', function(window, pane)
     window:toast_notification('WezTerm', 'Terminal bell', nil, NOTIFICATION_TIMEOUT_MS)
 end)
