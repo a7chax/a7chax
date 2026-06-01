@@ -10,11 +10,11 @@ config.default_prog = { '/bin/zsh' }
 if wezterm.target_triple:find("apple%-darwin") then
     -- macOS: login shell (needed for Homebrew PATH)
     config.default_prog = { '/bin/zsh', '-l' }
-else
+  else
     -- non-macOS: normal zsh
     config.default_prog = { '/bin/zsh' }
-end
--- For example, changing the initial geometry for new windows:
+  end
+  -- For example, changing the initial geometry for new windows:
 
 if wezterm.target_triple:find("apple%-darwin") then
     config.window_decorations = "RESIZE"
@@ -61,6 +61,9 @@ function get_max_cols(window)
     return cols
 end
 
+local act = wezterm.action
+
+
 wezterm.on(
     'window-config-reloaded',
     function(window)
@@ -75,11 +78,6 @@ wezterm.on(
     end
 )
 
-local NOTIFICATION_TIMEOUT_MS = 300
-wezterm.on('bell', function(window, pane)
-    window:toast_notification('WezTerm', 'Terminal bell', nil, NOTIFICATION_TIMEOUT_MS)
-end)
-
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
 -- Colors (sesuaikan theme kamu)
@@ -92,29 +90,29 @@ local HOVER_FG          = '#ffffff'
 
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
     local pane = tab.active_pane
-    local title = ' ? '
+    local title = tab.tab_title
 
-    if pane.current_working_dir then
-        local cwd = pane.current_working_dir.file_path or tostring(pane.current_working_dir)
-        cwd = cwd:gsub('^file://', ''):gsub('/+$', '')
-        title = cwd:match('([^/]+)$') or cwd
-    end
+    -- if no custom title, use cwd folder name
+    if not title or #title == 0 then
+        title = ' ? '
 
-    -- home → ~
-    if title == wezterm.home_dir:match('([^/]+)$') then
-        title = '~'
+        if pane.current_working_dir then
+            local cwd = pane.current_working_dir.file_path or tostring(pane.current_working_dir)
+            cwd = cwd:gsub('^file://', ''):gsub('/+$', '')
+            title = cwd:match('([^/]+)$') or cwd
+        end
+
+
     end
 
     local index = tab.tab_index + 1
     local text = string.format('  %d  %s  ', index, title)
 
-    -- truncate aman
     if #text > max_width then
         text = wezterm.truncate_right(text, max_width - 2) .. '… '
     end
 
     local bg, fg
-
     if tab.is_active then
         bg = ACTIVE_BG
         fg = ACTIVE_FG
@@ -127,15 +125,11 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
     end
 
     return {
-        -- tab body
         { Background = { Color = bg } },
         { Foreground = { Color = fg } },
         { Text = text },
-
-        -- powerline separator
         { Foreground = { Color = bg } },
         { Text = SOLID_RIGHT_ARROW },
-
     }
 end)
 
@@ -149,7 +143,21 @@ end
 -- The filled in variant of the < symbol
 config.tab_max_width = 40
 
-
+config.keys = {
+  -- Press Ctrl+Shift+E to rename the current tab
+  {
+    key = 'E',
+    mods = 'CTRL|SHIFT',
+    action = act.PromptInputLine {
+      description = 'Enter new name for tab',
+      action = wezterm.action_callback(function(window, _, line)
+        if line then
+          window:active_tab():set_title(line)
+        end
+      end),
+    },
+  },
+}
 
 -- Finally, return the configuration to wezterm:
 return config
