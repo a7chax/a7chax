@@ -31,8 +31,8 @@ config.font = wezterm.font_with_fallback {
 }
 
 config.color_scheme = 'Breeze (Gogh)'
-config.use_fancy_tab_bar = false
 config.default_cursor_style = 'SteadyBlock'
+config.enable_tab_bar = false
 
 config.visual_bell = {
     fade_in_function = 'EaseIn',
@@ -52,31 +52,9 @@ config.webgpu_power_preference = "HighPerformance"
 
 config.automatically_reload_config = true
 
-config.show_new_tab_button_in_tab_bar = false
-config.tab_bar_at_bottom = true
-
-function get_max_cols(window)
-    local tab = window:active_tab()
-    local cols = tab:get_size().cols
-    return cols
-end
 
 local act = wezterm.action
 
-
-wezterm.on(
-    'window-config-reloaded',
-    function(window)
-        wezterm.GLOBAL.cols = get_max_cols(window)
-    end
-)
-
-wezterm.on(
-    'window-resized',
-    function(window, pane)
-        wezterm.GLOBAL.cols = get_max_cols(window)
-    end
-)
 
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
@@ -138,24 +116,11 @@ if title == wezterm.home_dir:match('([^/]+)$') then
     title = '~'
 end
 
-
-
--- The filled in variant of the < symbol
-config.tab_max_width = 40
-
 config.keys = {
-  -- Press Ctrl+Shift+E to rename the current tab
   {
-    key = 'E',
+    key = 't',
     mods = 'CTRL|SHIFT',
-    action = act.PromptInputLine {
-      description = 'Enter new name for tab',
-      action = wezterm.action_callback(function(window, _, line)
-        if line then
-          window:active_tab():set_title(line)
-        end
-      end),
-    },
+    action = wezterm.action.DisableDefaultAssignment,
   },
 }
 
