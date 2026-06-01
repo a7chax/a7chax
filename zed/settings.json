@@ -7,6 +7,24 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "agent": {
+    "dock": "right",
+    "sidebar_side": "right",
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "project_panel": {
+    "dock": "left",
+  },
   "icon_theme": "Material Icon Theme",
   "telemetry": {
     "diagnostics": true,
@@ -18,7 +36,7 @@
     },
   },
   "disable_ai": false,
-  "ui_font_size": 13.0,
+  "ui_font_size": 14.0,
   "buffer_font_size": 12.0,
   "theme": {
     "mode": "dark",

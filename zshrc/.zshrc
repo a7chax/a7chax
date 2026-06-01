@@ -132,24 +132,9 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-# proto
-export PROTO_HOME="/home/nevermind/.proto"
-export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
-
-# Add global npm packages from proto node installation (dynamically)
-# This adds the bin directory for the active Node.js version's global packages
-if command -v node &> /dev/null; then
-    NODE_VERSION=$(node --version | sed 's/^v//')
-    if [ -d "$PROTO_HOME/tools/node/$NODE_VERSION/bin" ]; then
-        export PATH="$PROTO_HOME/tools/node/$NODE_VERSION/bin:$PATH"
-    fi
-fi
-
-export PATH="/home/nevermind/.pixi/bin:$PATH"
 
 # opencode
 export PATH=/home/nevermind/.opencode/bin:$PATH
 
 # bun global packages
-export PATH="$HOME/.bun/bin:$PATH"
-eval "$(~/.local/bin/mise activate)"
+eval "$(/usr/bin/mise activate)"
