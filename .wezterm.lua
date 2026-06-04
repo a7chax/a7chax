@@ -122,6 +122,59 @@ config.keys = {
     mods = 'CTRL|SHIFT',
     action = wezterm.action.DisableDefaultAssignment,
   },
+  -- Disable vertical splitting
+  {
+    key = '"',
+    mods = 'ALT|CTRL',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  {
+    key = '"',
+    mods = 'SHIFT|ALT|CTRL',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  {
+    key = '\'',
+    mods = 'SHIFT|ALT|CTRL',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  -- Disable horizontal splitting
+  {
+    key = '%',
+    mods = 'ALT|CTRL',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  {
+    key = '%',
+    mods = 'SHIFT|ALT|CTRL',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  {
+    key = '5',
+    mods = 'SHIFT|ALT|CTRL',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  -- Disable spawning new window
+  {
+    key = 'n',
+    mods = 'SHIFT|CTRL',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  {
+    key = 'N',
+    mods = 'SHIFT|CTRL',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  {
+    key = 'N',
+    mods = 'CTRL',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  {
+    key = 'n',
+    mods = 'SUPER',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
 }
 
 -- Finally, return the configuration to wezterm:
