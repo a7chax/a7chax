@@ -11,8 +11,8 @@ if wezterm.target_triple:find("apple%-darwin") then
     -- macOS: login shell (needed for Homebrew PATH)
     config.default_prog = { '/bin/zsh', '-l' }
   else
-    -- non-macOS: normal zsh
-    config.default_prog = { '/bin/zsh' }
+    -- non-macOS: WezTerm owns the zellij auto-start, not zsh itself.
+    config.default_prog = { '/bin/zsh', '-ic', 'zellij attach default -c' }
   end
   -- For example, changing the initial geometry for new windows:
 
