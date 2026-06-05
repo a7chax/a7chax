@@ -8,8 +8,8 @@ local config = wezterm.config_builder()
 config.default_prog = { '/bin/zsh' }
 
 if wezterm.target_triple:find("apple%-darwin") then
-    -- macOS: login shell (needed for Homebrew PATH)
-    config.default_prog = { '/bin/zsh', '-l' }
+    -- macOS GUI apps can start without the shell PATH; call zellij directly.
+    config.default_prog = { '/bin/zsh', '-lc', '$HOME/.cargo/bin/zellij attach default -c; exec /bin/zsh -l' }
   else
     -- non-macOS: WezTerm owns the zellij auto-start, not zsh itself.
     config.default_prog = { '/bin/zsh', '-ic', 'zellij attach default -c' }
@@ -176,6 +176,79 @@ config.keys = {
     action = wezterm.action.DisableDefaultAssignment,
   },
 }
+
+if wezterm.target_triple:find("apple%-darwin") then
+  local mac_key_disables = {
+    -- Disable spawning new tab
+    {
+      key = 't',
+      mods = 'CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = 'T',
+      mods = 'CMD|SHIFT',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    -- Disable vertical splitting
+    {
+      key = '"',
+      mods = 'OPT|CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = '"',
+      mods = 'SHIFT|OPT|CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = '\'',
+      mods = 'SHIFT|OPT|CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    -- Disable horizontal splitting
+    {
+      key = '%',
+      mods = 'OPT|CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = '%',
+      mods = 'SHIFT|OPT|CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = '5',
+      mods = 'SHIFT|OPT|CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    -- Disable spawning new window
+    {
+      key = 'n',
+      mods = 'CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = 'n',
+      mods = 'SHIFT|CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = 'N',
+      mods = 'SHIFT|CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = 'N',
+      mods = 'CMD',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+  }
+
+  for _, key in ipairs(mac_key_disables) do
+    table.insert(config.keys, key)
+  end
+end
 
 -- Finally, return the configuration to wezterm:
 return config
