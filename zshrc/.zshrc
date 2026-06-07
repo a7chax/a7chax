@@ -138,3 +138,27 @@ export PATH=/home/nevermind/.opencode/bin:$PATH
 
 # bun global packages
 eval "$(/usr/bin/mise activate)"
+
+_zellij_rename_tab_to_cwd() {
+  [[ -n "$ZELLIJ" ]] || return
+  [[ "${ZELLIJ_AUTO_RENAME_TAB:-1}" == "1" ]] || return
+
+  local name="${PWD##*/}"
+  [[ -n "$name" ]] || name="/"
+
+  command zellij action rename-tab "$name" >/dev/null 2>&1
+}
+
+zellij() {
+  if [[ "$1" == "action" && "$2" == "rename-tab" ]]; then
+    export ZELLIJ_AUTO_RENAME_TAB=0
+  elif [[ "$1" == "action" && "$2" == "undo-rename-tab" ]]; then
+    export ZELLIJ_AUTO_RENAME_TAB=1
+  fi
+
+  command zellij "$@"
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd _zellij_rename_tab_to_cwd
+_zellij_rename_tab_to_cwd
