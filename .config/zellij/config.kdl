@@ -366,7 +366,7 @@ theme "night-owl"
 //   - true (default, enabled)
 //   - false
 //
-     pane_frames false
+// pane_frames false
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
@@ -449,7 +449,7 @@ theme "night-owl"
 //   - true (default)
 //   - false
 //
-// session_serialization false
+session_serialization false
 
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
