@@ -46,8 +46,12 @@ config.colors = {
 
 config.notification_handling = 'AlwaysShow'
 config.scrollback_lines = 1000
-config.front_end = "WebGpu"
-config.webgpu_power_preference = "HighPerformance"
+if wezterm.target_triple:find("apple%-darwin") then
+    config.front_end = "WebGpu"
+    config.webgpu_power_preference = "HighPerformance"
+else
+    config.front_end = "OpenGL"
+end
 
 
 config.automatically_reload_config = true

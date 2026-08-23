@@ -10,7 +10,7 @@ The existing `wezterm.target_triple:find("apple%-darwin")` check will own render
 
 - macOS (`apple-darwin`): set `config.front_end` to `WebGpu` and retain the
   `HighPerformance` WebGPU power preference.
-- all other targets: set `config.front_end` to `OpenGl` and omit
+- all other targets: set `config.front_end` to `OpenGL` and omit
   `webgpu_power_preference`, since it applies only to WebGPU.
 
 This keeps all platform detection in the configuration's existing target-triple
