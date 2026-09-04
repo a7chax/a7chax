@@ -279,6 +279,12 @@ plugins {
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
     zellij:link
+    "file:~/.config/zellij/plugins/zellij-attention.wasm" {
+        // All options are optional — defaults shown
+        enabled "true"
+        waiting_icon "⏳"
+        completed_icon "✅"
+    }
 }
 web_client {
     font "monospace"
@@ -289,7 +295,7 @@ web_client {
 //   - true
 //   - false (Default)
 //
-simplified_ui true
+simplified_ui false
 
 // Enable OSC8 hyperlink output
 // Options:
@@ -301,12 +307,12 @@ simplified_ui true
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "night-owl"
+ theme "night-owl"
 
 // Theme to use when the host terminal reports a dark color palette.
 // Requires `theme_light` to also be set; otherwise `theme` is used.
 //
-// theme_dark "dracula"
+// theme_dark "blade-runner"
 
 // Theme to use when the host terminal reports a light color palette.
 // Requires `theme_dark` to also be set; otherwise `theme` is used.
@@ -356,7 +362,7 @@ default_layout "compact"
 //   - true (default, enabled)
 //   - false
 //
-// pane_frames false
+    pane_frames false
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

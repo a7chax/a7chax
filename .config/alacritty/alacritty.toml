@@ -1,0 +1,72 @@
+# Font
+[font]
+size = 12
+
+[font.offset]
+x = 0
+y = 0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+# Window
+[window]
+decorations = "Buttonless"
+dynamic_title = true
+
+
+
+
+# Scrollback
+[scrolling]
+history = 1000
+
+
+# Cursor
+[cursor]
+style = { shape = "Block", blinking = "Never" }
+
+
+[colors.primary]
+background = "#232627"
+foreground = "#FCFCFC"
+
+[colors.cursor]
+text = "#232627"
+cursor = "#FCFCFC"
+
+[colors.selection]
+text = "#232627"
+background = "#3DAEE9"
+
+[colors.normal]
+black = "#232627"
+red = "#ED1515"
+green = "#11D116"
+yellow = "#F67400"
+blue = "#1D99F3"
+magenta = "#9B59B6"
+cyan = "#1ABC9C"
+white = "#FCFCFC"
+
+[colors.bright]
+black = "#7F8C8D"
+red = "#C0392B"
+green = "#1CDC9A"
+yellow = "#FDBC4B"
+blue = "#3DAEE9"
+magenta = "#8E44AD"
+cyan = "#16A085"
+white = "#FFFFFF"
+
+
+[terminal]
+shell = { program = "/bin/zsh", args = ["-lc", "exec $HOME/.cargo/bin/zellij attach default -c"] }

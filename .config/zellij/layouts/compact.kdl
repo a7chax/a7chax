@@ -1,0 +1,10 @@
+layout {
+    default_tab_template {
+        pane
+        pane size=1 borderless=true {
+            plugin location="https://github.com/ishefi/zellaude/releases/latest/download/zellaude.wasm"
+        }
+    }
+
+    pane
+}
