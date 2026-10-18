@@ -11,6 +11,7 @@
   "show_wrap_guides": true,
   "relative_line_numbers": "disabled",
   "proxy": "",
+  "max_tabs": 8,
   "status_bar": {
     "show_active_file": true
   },
@@ -19,6 +20,7 @@
   "redact_private_values": false,
   "tab_size": 4,
   "preview_tabs": {
+    "enable_preview_from_file_finder": true,
     "enable_preview_from_multibuffer": false,
     "enabled": false
   },
@@ -40,6 +42,22 @@
     "dock": "left"
   },
   "agent": {
+    "threads_sidebar": {
+      "position": "right"
+    },
+    "tool_permissions": {
+      "tools": {
+        "skill": {
+          "default": "allow"
+        }
+      }
+    },
+    "default_model": {
+      "provider": "openai-subscribed",
+      "model": "gpt-5.6-terra",
+      "enable_thinking": true,
+      "effort": "medium"
+    },
     "dock": "right",
     "favorite_models": [],
     "model_parameters": []
@@ -69,13 +87,23 @@
     "provider": "zed"
   },
   "agent_servers": {
+    "opencode": {
+      "default_config_options": {
+        "model": "opencode/mimo-v2.6-flash-free"
+      },
+      "type": "registry"
+    },
+    "mistral-vibe": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "default_config_options": {
+        "reasoning_effort": "xhigh",
+        "mode": "agent"
+      },
+      "type": "registry"
+    },
     "github-copilot-cli": {
-      "type": "registry"
-    },
-    "gemini": {
-      "type": "registry"
-    },
-    "cursor": {
       "type": "registry"
     },
     "claude-acp": {
